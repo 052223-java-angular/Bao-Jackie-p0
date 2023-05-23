@@ -4,12 +4,11 @@ import java.util.Scanner;
 
 import com.revature.yolp.services.RouterService;
 
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
 public class HomeScreen implements IScreen {
     private final RouterService router;
-
-    public HomeScreen(RouterService router) {
-        this.router = router;
-    }
 
     @Override
     public void start(Scanner scan) {
