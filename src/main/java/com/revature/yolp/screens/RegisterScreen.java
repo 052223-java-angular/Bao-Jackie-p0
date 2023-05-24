@@ -2,10 +2,10 @@ package com.revature.yolp.screens;
 
 import java.util.Scanner;
 
-import com.revature.yolp.models.Session;
 import com.revature.yolp.models.User;
 import com.revature.yolp.services.RouterService;
 import com.revature.yolp.services.UserService;
+import com.revature.yolp.utils.Session;
 
 import lombok.AllArgsConstructor;
 
@@ -17,7 +17,6 @@ public class RegisterScreen implements IScreen {
 
     @Override
     public void start(Scanner scan) {
-        String input = "";
         String username = "";
         String password = "";
 
