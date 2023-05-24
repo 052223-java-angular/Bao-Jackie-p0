@@ -1,7 +1,5 @@
 package com.revature.yolp.models;
 
-import java.util.UUID;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,16 +11,14 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class User {
+public class Session {
     private String id;
     private String username;
-    private String password;
     private String roleId;
 
-    public User(String username, String password, String roleId) {
-        this.id = UUID.randomUUID().toString();
-        this.username = username;
-        this.password = password;
-        this.roleId = roleId;
+    public void setSession(User user) {
+        this.id = user.getId();
+        this.username = user.getUsername();
+        this.roleId = user.getRoleId();
     }
 }
