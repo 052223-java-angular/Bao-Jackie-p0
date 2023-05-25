@@ -2,6 +2,9 @@ package com.revature.yolp.screens;
 
 import java.util.Scanner;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.revature.yolp.services.RouterService;
 
 import lombok.AllArgsConstructor;
@@ -13,10 +16,13 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class HomeScreen implements IScreen {
     private final RouterService router;
+    private static final Logger logger = LogManager.getLogger(HomeScreen.class);
 
     @Override
     public void start(Scanner scan) {
         String input = "";
+
+        logger.info("Navigated to home screen.");
 
         exit: {
             while (true) {
@@ -31,16 +37,20 @@ public class HomeScreen implements IScreen {
 
                 switch (input.toLowerCase()) {
                     case "1":
+                        logger.info("Navigating to Login screen.");
                         // TODO: Implement login screen
                         break;
                     case "2":
+                        logger.info("Navigating to register screen.");
                         // Navigate to the RegisterScreen
                         router.navigate("/register", scan);
                         break;
                     case "x":
+                        logger.info("Exit home screen.");
                         System.out.println("\nGoodbye!");
                         break exit;
                     default:
+                        logger.warn("Invalid option!");
                         clearScreen();
                         System.out.println("Invalid option!");
                         System.out.print("\nPress enter to continue...");
