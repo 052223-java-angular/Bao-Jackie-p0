@@ -2,6 +2,9 @@ package com.revature.yolp.screens;
 
 import java.util.Scanner;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.revature.yolp.models.User;
 import com.revature.yolp.services.RouterService;
 import com.revature.yolp.services.UserService;
@@ -14,11 +17,14 @@ public class RegisterScreen implements IScreen {
     private final UserService userService;
     private final RouterService router;
     private Session session;
+    private static final Logger logger = LogManager.getLogger(RegisterScreen.class);
 
     @Override
     public void start(Scanner scan) {
         String username = "";
         String password = "";
+
+        logger.info("Start registration process...");
 
         exit: {
             while (true) {
@@ -28,7 +34,10 @@ public class RegisterScreen implements IScreen {
                 // get username
                 username = getUsername(scan);
 
+                logger.info("username: {}", username);
+
                 if (username.equals("x")) {
+                    logger.info("Exit registration screen.");
                     break exit;
                 }
 
@@ -36,6 +45,7 @@ public class RegisterScreen implements IScreen {
                 password = getPassword(scan);
 
                 if (password.equals("x")) {
+                    logger.info("Exit registration screen.");
                     break exit;
                 }
 
@@ -48,27 +58,26 @@ public class RegisterScreen implements IScreen {
 
                 switch (scan.nextLine()) {
                     case "y":
+                        logger.info("User confirm credentials are correct.");
                         User createdUser = userService.register(username, password);
                         session.setSession(createdUser);
                         router.navigate("/menu", scan);
                         break exit;
                     case "n":
+                        logger.info("Restarting registration process...");
                         clearScreen();
                         System.out.println("Restarting process...");
                         System.out.print("\nPress enter to continue...");
                         scan.nextLine();
                         break;
                     default:
+                        logger.warn("Invalid option!");
                         clearScreen();
                         System.out.println("Invalid option!");
                         System.out.print("\nPress enter to continue...");
                         scan.nextLine();
                         break;
                 }
-
-                // break out if info is correct
-
-                break exit; // will be removed for switch statement
             }
         }
     }
@@ -89,6 +98,7 @@ public class RegisterScreen implements IScreen {
             }
 
             if (!userService.isValidUsername(username)) {
+                logger.warn("Invalid username for: {}", username);
                 clearScreen();
                 System.out.println("Username needs to be 8-20 characters long.");
                 System.out.print("\nPress enter to continue...");
@@ -97,6 +107,7 @@ public class RegisterScreen implements IScreen {
             }
 
             if (!userService.isUniqueUsername(username)) {
+                logger.warn("Username is not unique for: {}", username);
                 clearScreen();
                 System.out.println("Username is not unique!");
                 System.out.print("\nPress enter to continue...");
