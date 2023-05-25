@@ -6,6 +6,10 @@ import com.revature.yolp.services.RouterService;
 
 import lombok.AllArgsConstructor;
 
+/**
+ * The HomeScreen class represents the home screen of the Yolp Application.
+ * It implements the IScreen interface.
+ */
 @AllArgsConstructor
 public class HomeScreen implements IScreen {
     private final RouterService router;
@@ -19,7 +23,7 @@ public class HomeScreen implements IScreen {
                 clearScreen();
                 System.out.println("Welcome to YOLP!");
                 System.out.println("\n[1] Login screen");
-                System.out.println("[2] register screen");
+                System.out.println("[2] Register screen");
                 System.out.println("[x] Exit");
 
                 System.out.print("\nEnter: ");
@@ -27,8 +31,10 @@ public class HomeScreen implements IScreen {
 
                 switch (input.toLowerCase()) {
                     case "1":
+                        // TODO: Implement login screen
                         break;
                     case "2":
+                        // Navigate to the RegisterScreen
                         router.navigate("/register", scan);
                         break;
                     case "x":
@@ -49,6 +55,9 @@ public class HomeScreen implements IScreen {
      * ------------------------ Helper methods ------------------------------
      */
 
+    /**
+     * Clears the console screen.
+     */
     private void clearScreen() {
         System.out.print("\033[H\033[2J");
         System.out.flush();

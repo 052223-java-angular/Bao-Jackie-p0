@@ -1,4 +1,6 @@
-package com.revature.yolp.models;
+package com.revature.yolp.utils;
+
+import com.revature.yolp.models.User;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,6 +14,7 @@ import lombok.ToString;
 @Setter
 @ToString
 public class Session {
+    // 1, 2, 3, 4...... 10000
     private String id;
     private String username;
     private String roleId;

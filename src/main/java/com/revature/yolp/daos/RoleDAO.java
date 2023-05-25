@@ -10,7 +10,7 @@ import java.util.Optional;
 
 import com.revature.yolp.models.Role;
 import com.revature.yolp.models.User;
-import com.revature.yolp.utils.ConnectionFaction;
+import com.revature.yolp.utils.ConnectionFactory;
 
 public class RoleDAO implements CrudDAO<Role> {
 
@@ -45,7 +45,7 @@ public class RoleDAO implements CrudDAO<Role> {
     }
 
     public Optional<Role> findByName(String name) {
-        try (Connection conn = ConnectionFaction.getInstance().getConnection()) {
+        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
             String sql = "SELECT * FROM roles WHERE name = ?";
 
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
